@@ -2,8 +2,11 @@
 
 echo "Welcome to Snake and Ladder Simulator"
 
+#constants
+WINNING_POSITION=100
+
 #variable
-startPosition=0
+currentPosition=0
 
 function dieRoll() {
 	dice=$((RANDOM%6+1))
@@ -12,17 +15,27 @@ function dieRoll() {
 dieRoll
 
 function optionCheck() {
-	options=$((RANDOM%3+1))
-	case $options in
-		1)
-			startPosition=$startPosition
-			;;
-		2)
-			startPosition=$((startPosition+$(dieRoll)))
-			;;
-		3)
-			startPosition=$((startPosition-$(dieRoll)))
-			;;
-	esac
+	while [[ $currentPosition -lt $WINNING_POSITION ]]
+	do
+		options=$((RANDOM%3+1))
+		case $options in
+			1)
+				currentPosition=$currentPosition
+				;;
+			2)
+				currentPosition=$((currentPosition+$(dieRoll)))
+				;;
+			3)
+				currentPosition=$((currentPosition-$(dieRoll)))
+				;;
+		esac
+
+		if [ $currentPosition -lt 0 ]
+		then
+			currentPosition=0
+		fi
+
+		echo "Player Position = $currentPosition"
+	done
 }
 optionCheck
