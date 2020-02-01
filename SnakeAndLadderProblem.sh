@@ -48,15 +48,15 @@ while [[ $player1 -ne $WINNING_POSITION && $player2 -ne $WINNING_POSITION ]]
 do
 	if [ $flag -eq 1 ]
    then
-      optionCheck
+		optionCheck
 		player1=$currentPosition
 		playerPosition["player1:currentPosition"]=$currentPosition
-      flag=0
+		flag=0
    else
-      optionCheck
+		optionCheck
 		player2=$currentPosition
 		playerPosition["player2:currentPosition"]=$currentPosition
-      flag=1
+		flag=1
    fi
 done
 
