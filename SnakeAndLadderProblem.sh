@@ -54,7 +54,7 @@ do
       flag=0
    else
       optionCheck
-     	player2=$currentPosition
+		player2=$currentPosition
 		playerPosition["player2:currentPosition"]=$currentPosition
       flag=1
    fi
