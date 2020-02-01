@@ -15,7 +15,7 @@ function dieRoll() {
 dieRoll
 
 function optionCheck() {
-	while [[ $currentPosition -lt $WINNING_POSITION ]]
+	while [[ $currentPosition -ne $WINNING_POSITION ]]
 	do
 		options=$((RANDOM%3+1))
 		case $options in
@@ -24,6 +24,10 @@ function optionCheck() {
 				;;
 			2)
 				currentPosition=$((currentPosition+$(dieRoll)))
+				if [ $currentPosition -gt $WINNING_POSITION ]
+				then
+					currentPosition=$(( currentPosition-$(dieRoll) ))
+				fi
 				;;
 			3)
 				currentPosition=$((currentPosition-$(dieRoll)))
