@@ -18,29 +18,29 @@ function dieRoll() {
 
 function optionCheck() {
 
-		options=$((RANDOM%3+1))
-		case $options in
-			1)
-				currentPosition=$currentPosition
-				;;
-			2)
-				currentPosition=$(( currentPosition+$dice ))
-				if [ $currentPosition -gt $WINNING_POSITION ]
-				then
-					currentPosition=$(( currentPosition-$dice ))
-				fi
-				;;
-			3)
+	options=$((RANDOM%3+1))
+	case $options in
+		1)
+			currentPosition=$currentPosition
+			;;
+		2)
+			currentPosition=$(( currentPosition+$dice ))
+			if [ $currentPosition -gt $WINNING_POSITION ]
+			then
 				currentPosition=$(( currentPosition-$dice ))
-				;;
-		esac
+			fi
+			;;
+		3)
+			currentPosition=$(( currentPosition-$dice ))
+			;;
+	esac
 
-		if [ $currentPosition -lt 0 ]
-		then
-			currentPosition=0
-		fi
+	if [ $currentPosition -lt 0 ]
+	then
+		currentPosition=0
+	fi
 
-		playerPosition[currentPosition]=$currentPosition
+	playerPosition[currentPosition]=$currentPosition
 }
 
 while [ $currentPosition -ne $WINNING_POSITION ]
