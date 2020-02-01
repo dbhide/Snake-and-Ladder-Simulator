@@ -6,14 +6,17 @@ echo "Welcome to Snake and Ladder Simulator"
 
 #constants
 WINNING_POSITION=100
+START_POSITION=0
 
 #variable
-currentPosition=0
+currentPosition=$START_POSITION
 dieCount=0
+player1=$START_POSITION
+player2=$START_POSITION
+flag=1
 
 function dieRoll() {
 	dice=$((RANDOM%6+1))
-	optionCheck
 }
 
 function optionCheck() {
@@ -24,30 +27,47 @@ function optionCheck() {
 			currentPosition=$currentPosition
 			;;
 		2)
-			currentPosition=$(( currentPosition+$dice ))
+			currentPosition=$(( $currentPosition + $dice ))
 			if [ $currentPosition -gt $WINNING_POSITION ]
 			then
-				currentPosition=$(( currentPosition-$dice ))
+				currentPosition=$(( $currentPosition - $dice ))
 			fi
 			;;
 		3)
-			currentPosition=$(( currentPosition-$dice ))
+			currentPosition=$(( $currentPosition - $dice ))
+			if [ $currentPosition -lt $START_POSITION ]
+			then
+				currentPosition=$START_POSITION
+			fi
 			;;
 	esac
-
-	if [ $currentPosition -lt 0 ]
-	then
-		currentPosition=0
-	fi
-
-	playerPosition[currentPosition]=$currentPosition
 }
 
-while [ $currentPosition -ne $WINNING_POSITION ]
+while [[ $player1 -ne $WINNING_POSITION && $player2 -ne $WINNING_POSITION ]]
 do
-	dieRoll
-	((dieCount++))
+	if [ $flag -eq 1 ]
+   then
+      dieRoll
+      ((dieCount++))
+      optionCheck
+		player1=$currentPosition
+		playerPosition["player1:currentPosition"]=$currentPosition
+      flag=0
+   else
+      dieRoll
+      ((dieCount++))
+      optionCheck
+     	player2=$currentPosition
+		playerPosition["player2:currentPosition"]=$currentPosition
+      flag=1
+   fi
 done
 
-echo "Dice was played $dieCount times to win the Game"
+if [ $player1 -eq 100 ]
+then
+	echo "Player1 Wins"
+else
+	echo "Player2 Wins"
+fi
 
+echo "Dice was played $dieCount times to win the Game"
