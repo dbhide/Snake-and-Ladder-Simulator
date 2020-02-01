@@ -20,7 +20,8 @@ function dieRoll() {
 }
 
 function optionCheck() {
-
+	dieRoll
+	((dieCount++))
 	options=$((RANDOM%3+1))
 	case $options in
 		1)
@@ -47,15 +48,11 @@ while [[ $player1 -ne $WINNING_POSITION && $player2 -ne $WINNING_POSITION ]]
 do
 	if [ $flag -eq 1 ]
    then
-      dieRoll
-      ((dieCount++))
       optionCheck
 		player1=$currentPosition
 		playerPosition["player1:currentPosition"]=$currentPosition
       flag=0
    else
-      dieRoll
-      ((dieCount++))
       optionCheck
      	player2=$currentPosition
 		playerPosition["player2:currentPosition"]=$currentPosition
@@ -70,4 +67,4 @@ else
 	echo "Player2 Wins"
 fi
 
-echo "Dice was played $dieCount times to win the Game"
+echo "Dice was rolled $dieCount times to win the Game"
