@@ -2,7 +2,7 @@
 
 declare -A playerPosition
 
-echo "Welcome to Snake and Ladder Simulator"
+echo "Welcome to Snake and Ladder Game Simulator"
 
 #constants
 WINNING_POSITION=100
@@ -15,10 +15,12 @@ player1=$START_POSITION
 player2=$START_POSITION
 flag=1
 
+#!To roll dice
 function dieRoll() {
 	dice=$((RANDOM%6+1))
 }
 
+#!To choose berween options No_Play, Snake or Ladder
 function optionCheck() {
 	dieRoll
 	((dieCount++))
@@ -44,6 +46,7 @@ function optionCheck() {
 	esac
 }
 
+#!Main 
 game() {
 	while [[ $currentPosition -ne $WINNING_POSITION ]]
 	do
@@ -63,6 +66,7 @@ game() {
 
 game
 
+#!Checks winner
 if [ $player1 -eq $WINNING_POSITION ]
 then
 	echo "Player1 Wins"
