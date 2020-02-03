@@ -60,7 +60,7 @@ do
    fi
 done
 
-if [ $player1 -eq 100 ]
+if [ $player1 -eq $WINNING_POSITION ]
 then
 	echo "Player1 Wins"
 else
