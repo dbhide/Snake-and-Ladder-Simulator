@@ -45,16 +45,15 @@ function optionCheck() {
 }
 
 game() {
-	while [[ $player1 -ne $WINNING_POSITION && $player2 -ne $WINNING_POSITION ]]
+	while [[ $currentPosition -ne $WINNING_POSITION ]]
 	do
+		optionCheck
 		if [ $flag -eq 1 ]
 		then
-			optionCheck
 			player1=$currentPosition
 			playerPosition["player1:currentPosition"]=$currentPosition
 			flag=0
    	else
-			optionCheck
 			player2=$currentPosition
 			playerPosition["player2:currentPosition"]=$currentPosition
 			flag=1
@@ -62,12 +61,14 @@ game() {
 	done
 }
 
+game
+
 if [ $player1 -eq $WINNING_POSITION ]
 then
 	echo "Player1 Wins"
-else
+elif [ $player2 -eq $WINNING_POSITION ]
+then
 	echo "Player2 Wins"
 fi
 
-game
 echo "Dice was rolled $dieCount times to win the Game"
