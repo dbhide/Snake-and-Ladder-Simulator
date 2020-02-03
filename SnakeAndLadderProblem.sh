@@ -69,4 +69,5 @@ else
 	echo "Player2 Wins"
 fi
 
+game
 echo "Dice was rolled $dieCount times to win the Game"
